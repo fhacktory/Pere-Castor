@@ -28,10 +28,7 @@ exports.authenticate = authenticate = function(event, context) {
         }
         else {
             if (res == false) {
-                context.succeed({
-                    authorized: false,
-                    result: 'INVALID_CREDENTIALS'
-                });
+                context.fail('INVALID_CREDENTIALS');
             }
             else {
                 context.succeed({
@@ -57,10 +54,7 @@ exports.createUser = createUser = function(event, context) {
         }
         else {
             if (res == false) {
-                context.succeed({
-                    authorized: false,
-                    result: 'CONFLICT'
-                });
+                context.fail('CONFLICT');
             }
             else {
                 context.succeed({
@@ -81,10 +75,7 @@ exports.getChapters = getChapters = function(event, context) {
         }
         else {
             if (err == false) {
-                context.succeed({
-                    authorized: false,
-                    result: 'INVALID_CREDENTIALS'
-                });
+                context.fail('INVALID_CREDENTIALS');
             }
             context.succeed(res);
         }
@@ -103,10 +94,7 @@ exports.createChapter = createChapter = function(event, context) {
         }
         else {
             if (err == false) {
-                context.succeed({
-                    authorized: false,
-                    result: 'INVALID_CREDENTIALS'
-                });
+                context.fail('INVALID_CREDENTIALS');
             }
             context.succeed(res);
         }
@@ -131,10 +119,7 @@ exports.updateChapter = updateChapter = function(event, context) {
         }
         else {
             if (err == false) {
-                context.succeed({
-                    authorized: false,
-                    result: 'INVALID_CREDENTIALS'
-                });
+               context.fail('INVALID_CREDENTIALS');
             }
             context.succeed({
                 result: 'SUCCESS'
@@ -162,10 +147,7 @@ exports.deleteChapter = deleteChapter = function(event, context) {
         }
         else {
             if (err == false) {
-                context.succeed({
-                    authorized: false,
-                    result: 'INVALID_CREDENTIALS'
-                });
+                context.fail('INVALID_CREDENTIALS');
             }
             context.succeed({
                 result: 'SUCCESS'
@@ -190,10 +172,7 @@ exports.getUserStories = getUserStories = function(event, context) {
         }
         else {
             if (res == false) {
-                context.succeed({
-                    authorized: false,
-                    result: 'NO_STORIES_FOR_USER'
-                });
+                context.fail('NO_STORIES_FOR_USER');
             }
             else {
                 context.succeed({
@@ -218,10 +197,7 @@ exports.addStory = addStory = function(event, context) {
         }
         else {
             if (res == false) {
-                context.succeed({
-                    authorized: false,
-                    result: 'STORY_EXISTS'
-                });
+                context.fail('STORY_EXISTS');
             }
             else {
                 context.succeed({
@@ -248,10 +224,7 @@ exports.updateStory = updateStory = function(event, context) {
         }
         else {
             if (res == false) {
-                context.succeed({
-                    authorized: false,
-                    result: 'NO_STORY_PSEUDO_ID'
-                });
+                context.fail('NO_STORY_PSEUDO_ID');
             }
             else {
                 context.succeed({
@@ -279,10 +252,7 @@ exports.deleteStory = deleteStory = function(event, context) {
         }
         else {
             if (res == false) {
-                context.succeed({
-                    authorized: false,
-                    result: 'NO_STORY_PSEUDO_ID'
-                });
+                context.fail('NO_STORY_PSEUDO_ID');
             }
             else {
                 context.succeed({
@@ -308,10 +278,7 @@ exports.getPages = getPages = function(event, context) {
         }
         else {
             if (res == false) {
-                context.succeed({
-                    authorized: false,
-                    result: 'NO_PAGE_CODE_CHAPTER'
-                })
+                context.fail('NO_PAGE_CODE_CHAPTER');
             }
             else {
                 context.succeed({
@@ -332,10 +299,7 @@ exports.addPage = addPage = function(event, context) {
         }
         else {
             if (res == false) {
-                context.succeed({
-                    authorized: false,
-                    result: 'PAGE_EXISTS'
-                })
+                context.fail('PAGE_EXISTS');
             }
             else {
                 context.succeed({
@@ -356,10 +320,7 @@ exports.updatePage = updatePage = function(event, context) {
         }
         else {
             if (res == false) {
-                context.succeed({
-                    authorized: false,
-                    result: 'PAGE_NOT_EXISTS'
-                })
+                context.fail('PAGE_NOT_EXISTS');
             }
             else {
                 context.succeed({
@@ -380,10 +341,7 @@ exports.deletePage = deletePage = function(event, context) {
         }
         else {
             if (res == false) {
-                context.succeed({
-                    authorized: false,
-                    result: 'PAGE_NOT_EXISTS'
-                })
+                context.fail('PAGE_NOT_EXISTS');
             }
             else {
                 context.succeed({
@@ -429,14 +387,14 @@ deletePage({
     token: token,
     story: "story",
     chapter: "chapter",
-    id:"VyezCFDTnl"
+    id: "VyezCFDTnl"
 }, ctx);
 
 updatePage({
     token: token,
     story: "story",
     chapter: "chapter",
-    id:"Vkx2B3w63l",
+    id: "Vkx2B3w63l",
     title: "titreEdit",
     description: "descEdit",
     text: "textEdit",
