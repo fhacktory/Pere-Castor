@@ -62,7 +62,7 @@ var Story = {
                     BOOL: isPublic
                 },
                 date: {
-                    N: Date.now().toString()    
+                    N: Date.now().toString()
                 }
             },
             TableName: 'stories',

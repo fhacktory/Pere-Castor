@@ -1,7 +1,7 @@
 var UserController = require('./api/user/user.controller');
 var StoryController = require('./api/story/story.controller');
 
-var authenticate, getUserStories, addStory,updateStory,deleteStory;
+var authenticate, getUserStories, addStory, updateStory, deleteStory;
 
 exports.authenticate = authenticate = function(event, context) {
     UserController.login(event.pseudo, event.password, function(err, res) {
