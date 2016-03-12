@@ -1,7 +1,7 @@
 var UserController = require('./api/user/user.controller');
 var StoryController = require('./api/story/story.controller');
 
-var authenticate,getUserStories;
+var authenticate, getUserStories;
 
 exports.authenticate = authenticate = function(event, context) {
     UserController.login(event.pseudo, event.password, function(err, res) {
@@ -69,6 +69,5 @@ authenticate({
 
 
 getUserStories({
-    pseudo: 'toto',
-    password: 'titi'
+    token: 'sdvgqdsfgfdgdfgsdfgdfg',
 }, ctx);

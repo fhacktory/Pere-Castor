@@ -44,10 +44,33 @@ var Story = {
             }
         });
     },
-    add: function(pseudo, name, isPublic) {
-        
+    add: function(pseudo, name, isPublic,callback) {
+        var params = {
+            Key: {
+                code: {
+                    S: pseudo
+                },
+                name: {
+                    S: name
+                },
+                public:{
+                    BOOL:isPublic
+                },
+                date:{
+                    N:Date.now()
+                }
+            },
+            TableName: 'stories'
+        };
+        db.putItem(params, function(err, data) {
+            if (err) {
+                callback(err);
+            }
+            else {
+                callback(null, data);
+            }
+        });
     }
-
 }
 
 module.export = Story;
