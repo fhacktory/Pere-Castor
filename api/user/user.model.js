@@ -1,3 +1,4 @@
+var dbUtils = require('../../lib/dynamoUtils');
 var AWS = require('aws-sdk');
 AWS.config.update({
     region: 'us-west-2'
@@ -21,7 +22,9 @@ var User = {
                 callback(err);
             }
             else {
-                callback(null, data);
+                var obj = {};
+                dbUtils.decodeValues(obj, data.Item);
+                callback(null, obj);
             }
         });
     },
@@ -46,9 +49,9 @@ var User = {
         };
         db.putItem(params, function(err, data) {
             if (err) {
-               callback(err);
+                callback(err);
             }
-            else{
+            else {
                 callback(null);
             }
         });

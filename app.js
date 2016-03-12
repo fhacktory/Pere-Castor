@@ -1,6 +1,7 @@
 var UserController = require('./api/user/user.controller');
+var ChapterController = require('./api/chapter/chapter.controller');
 
-var authenticate, createUser;
+var authenticate, createUser, getStories;
 
 exports.authenticate = authenticate = function(event, context) {
     UserController.login(event.pseudo, event.password, function(err, res) {
@@ -42,6 +43,16 @@ exports.createUser = createUser = function(event, context) {
                     }
                 });
             }
+        }
+    });
+};
+
+exports.getStories = getStories = function(event, context) {
+    ChapterController.getList(event.token, event.story, function(err, res) {
+        if (err) {
+            context.fail(err);
+        } else {
+            context.succeed(res);
         }
     });
 };
