@@ -17,14 +17,37 @@ var Story = {
         db.query(params, function(err, data) {
             if (err) {
                 callback(err);
-            } else {
+            }
+            else {
                 callback(null, data);
             }
         });
+    },
+    get: function(pseudo, id, callback) {
+        var params = {
+            Key: {
+                code: {
+                    S: pseudo
+                },
+                id: {
+                    S: id
+                }
+            },
+            TableName: 'stories'
+        };
+        db.getItem(params, function(err, data) {
+            if (err) {
+                callback(err);
+            }
+            else {
+                callback(null, data);
+            }
+        });
+    },
+    add: function(pseudo, name, isPublic) {
+        
     }
-    get:function(){
 
-    }
 }
 
 module.export = Story;
