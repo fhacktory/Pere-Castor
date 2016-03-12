@@ -1,7 +1,7 @@
 var UserController = require('./api/user/user.controller');
 var StoryController = require('./api/story/story.controller');
 
-var authenticate, getUserStories, addStory;
+var authenticate, getUserStories, addStory,updateStory,deleteStory;
 
 exports.authenticate = authenticate = function(event, context) {
     UserController.login(event.pseudo, event.password, function(err, res) {
@@ -60,7 +60,7 @@ exports.addStory = addStory = function(event, context) {
             if (res == false) {
                 context.succeed({
                     authorized: false,
-                    result: 'NO_STORIES_FOR_USER'
+                    result: 'STORY_EXISTS'
                 })
             }
             else {
@@ -74,6 +74,55 @@ exports.addStory = addStory = function(event, context) {
         }
     });
 }
+
+exports.updateStory = updateStory = function(event, context) {
+    StoryController.updateStory(event.token, event.id, event.name, event.isPublic, function(err, res) {
+        if (err) {
+            context.fail(err);
+        }
+        else {
+            if (res == false) {
+                context.succeed({
+                    authorized: false,
+                    result: 'NO_STORY_PSEUDO_ID'
+                })
+            }
+            else {
+                context.succeed({
+                    authorized: true,
+                    result: {
+                        stories: res
+                    }
+                })
+            }
+        }
+    });
+}
+
+exports.deleteStory = deleteStory = function(event, context) {
+    StoryController.deleteStory(event.token, event.id, function(err, res) {
+        if (err) {
+            context.fail(err);
+        }
+        else {
+            if (res == false) {
+                context.succeed({
+                    authorized: false,
+                    result: 'NO_STORY_PSEUDO_ID'
+                })
+            }
+            else {
+                context.succeed({
+                    authorized: true,
+                    result: {
+                        stories: res
+                    }
+                })
+            }
+        }
+    });
+}
+
 
 var ctx = {
     succeed: function(mess) {
@@ -107,13 +156,18 @@ getUserStories({
     token: token,
 }, ctx);
 
-addStory({
+updateStory({
     token: token,
-    oldName: "myStory",
+    id: "myStory",
     newName: "myStoryEdited",
     isPublic: false
 }, ctx);
 
 getUserStories({
     token: token,
+}, ctx);
+
+deleteStory({
+    token: token,
+    id: "EkBJ9Vphe"
 }, ctx);

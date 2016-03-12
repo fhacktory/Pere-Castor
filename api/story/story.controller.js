@@ -50,10 +50,10 @@ function checkAdd(callback) {
     }
 }
 
-exports.updateStory = function(token, oldName, newName, isPublic, callback) {
+exports.updateStory = function(token, id, name, isPublic, callback) {
     var pseudo = getPseudoFromToken(token);
-    if (pseudo && oldName) {
-        Story.update(pseudo, oldName, newName, isPublic, callback);
+    if (pseudo && id) {
+        Story.update(pseudo, id, name, isPublic, callback);
     }
 }
 

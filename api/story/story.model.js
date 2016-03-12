@@ -77,22 +77,22 @@ var Story = {
             }
         });
     },
-    update: function(pseudo, oldName, newName, isPublic, callback) {
+    update: function(pseudo, id, storyName, isPublic, callback) {
         var params = {
             Key: {
                 code: {
                     S: pseudo
                 },
-                name: {
-                    S: oldName
+                id: {
+                    S: id
                 }
             },
             TableName: 'stories',
             AttributeUpdates: {
-                name: {
+                storyname: {
                     Action: "PUT",
                     Value: {
-                        S: newName
+                        S: storyName
                     }
                 },
                 public: {
