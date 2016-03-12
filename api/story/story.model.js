@@ -3,15 +3,17 @@ AWS.config.update({
     region: 'us-west-2'
 });
 var db = new AWS.DynamoDB();
+var shortid = require('shortid');
 
 var Story = {
     list: function(pseudo, callback) {
         var params = {
-            Key: {
-                code: {
+            ExpressionAttributeValues: {
+                ":code": {
                     S: pseudo
                 }
             },
+            KeyConditionExpression: 'code=:code',
             TableName: 'stories'
         };
         db.query(params, function(err, data) {
@@ -44,25 +46,85 @@ var Story = {
             }
         });
     },
-    add: function(pseudo, name, isPublic,callback) {
+    add: function(pseudo, name, isPublic, callback) {
+        var params = {
+            Item: {
+                id: {
+                    S: shortid.generate()
+                },
+                code: {
+                    S: pseudo
+                },
+                storyName: {
+                    S: name
+                },
+                public: {
+                    BOOL: isPublic
+                },
+                date: {
+                    N: Date.now().toString()    
+                }
+            },
+            TableName: 'stories',
+            ConditionExpression: 'attribute_not_exists(code) and attribute_not_exists(storyName)'
+        };
+        db.putItem(params, function(err, data) {
+            if (err) {
+                callback(err);
+            }
+            else {
+                callback(null, data);
+            }
+        });
+    },
+    update: function(pseudo, oldName, newName, isPublic, callback) {
         var params = {
             Key: {
                 code: {
                     S: pseudo
                 },
                 name: {
-                    S: name
+                    S: oldName
+                }
+            },
+            TableName: 'stories',
+            AttributeUpdates: {
+                name: {
+                    Action: "PUT",
+                    Value: {
+                        S: newName
+                    }
                 },
-                public:{
-                    BOOL:isPublic
+                public: {
+                    Action: "PUT",
+                    Value: {
+                        BOOL: isPublic
+                    }
+                }
+            }
+        };
+        db.updateItem(params, function(err, data) {
+            if (err) {
+                callback(err);
+            }
+            else {
+                callback(null, data);
+            }
+        });
+    },
+    delete: function(pseudo, id, callback) {
+        var params = {
+            Key: {
+                code: {
+                    S: pseudo
                 },
-                date:{
-                    N:Date.now()
+                id: {
+                    S: id
                 }
             },
             TableName: 'stories'
         };
-        db.putItem(params, function(err, data) {
+        db.deleteItem(params, function(err, data) {
             if (err) {
                 callback(err);
             }
@@ -73,4 +135,4 @@ var Story = {
     }
 }
 
-module.export = Story;
+module.exports = Story;

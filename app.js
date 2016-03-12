@@ -1,7 +1,7 @@
 var UserController = require('./api/user/user.controller');
 var StoryController = require('./api/story/story.controller');
 
-var authenticate, getUserStories;
+var authenticate, getUserStories, addStory;
 
 exports.authenticate = authenticate = function(event, context) {
     UserController.login(event.pseudo, event.password, function(err, res) {
@@ -27,7 +27,6 @@ exports.authenticate = authenticate = function(event, context) {
     });
 }
 
-
 exports.getUserStories = getUserStories = function(event, context) {
     StoryController.getUserStories(event.token, function(err, res) {
         if (err) {
@@ -44,7 +43,7 @@ exports.getUserStories = getUserStories = function(event, context) {
                 context.succeed({
                     authorized: true,
                     result: {
-                        stories: res.stories
+                        stories: res
                     }
                 })
             }
@@ -52,6 +51,29 @@ exports.getUserStories = getUserStories = function(event, context) {
     });
 }
 
+exports.addStory = addStory = function(event, context) {
+    StoryController.addStory(event.token, event.name, event.isPublic, function(err, res) {
+        if (err) {
+            context.fail(err);
+        }
+        else {
+            if (res == false) {
+                context.succeed({
+                    authorized: false,
+                    result: 'NO_STORIES_FOR_USER'
+                })
+            }
+            else {
+                context.succeed({
+                    authorized: true,
+                    result: {
+                        stories: res
+                    }
+                })
+            }
+        }
+    });
+}
 
 var ctx = {
     succeed: function(mess) {
@@ -62,12 +84,36 @@ var ctx = {
     }
 };
 
+/* TESTS */
+var jwt = require('jsonwebtoken');
+var token = jwt.sign({
+    pseudo: "toto"
+}, '§%p3r3c4570r§%');
+
+console.log(token);
 authenticate({
     pseudo: 'toto',
     password: 'titi'
 }, ctx);
 
 
+addStory({
+    token: token,
+    name: "myStory",
+    isPublic: true
+}, ctx);
+
 getUserStories({
-    token: 'sdvgqdsfgfdgdfgsdfgdfg',
+    token: token,
+}, ctx);
+
+addStory({
+    token: token,
+    oldName: "myStory",
+    newName: "myStoryEdited",
+    isPublic: false
+}, ctx);
+
+getUserStories({
+    token: token,
 }, ctx);

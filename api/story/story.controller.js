@@ -30,6 +30,36 @@ exports.getStory = function(token, id, callback) {
 exports.addStory = function(token, name, isPublic, callback) {
     var pseudo = getPseudoFromToken(token);
     if (pseudo && name) {
-        Story.add(pseudo, name, isPublic, callback);
+        Story.add(pseudo, name, isPublic, checkAdd(callback));
+    }
+}
+
+function checkAdd(callback) {
+    return function(err, data) {
+        if (err) {
+            if (err.code == 'ConditionalCheckFailedException') {
+                callback(null, false);
+            }
+            else {
+                callback(err);
+            }
+        }
+        else {
+            callback(null, data);
+        }
+    }
+}
+
+exports.updateStory = function(token, oldName, newName, isPublic, callback) {
+    var pseudo = getPseudoFromToken(token);
+    if (pseudo && oldName) {
+        Story.update(pseudo, oldName, newName, isPublic, callback);
+    }
+}
+
+exports.deleteStory = function(token, id, callback) {
+    var pseudo = getPseudoFromToken(token);
+    if (pseudo && id) {
+        Story.delete(pseudo, id, callback);
     }
 }
