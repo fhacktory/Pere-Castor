@@ -17,7 +17,7 @@ exports.getUserStories = function(token, callback) {
     if (pseudo) {
         Story.list(pseudo, callback);
     }
-}
+};
 
 
 exports.getStory = function(token, id, callback) {
@@ -25,14 +25,14 @@ exports.getStory = function(token, id, callback) {
     if (pseudo) {
         Story.get(pseudo, id, callback);
     }
-}
+};
 
 exports.addStory = function(token, name, isPublic, callback) {
     var pseudo = getPseudoFromToken(token);
     if (pseudo && name) {
         Story.add(pseudo, name, isPublic, checkAdd(callback));
     }
-}
+};
 
 function checkAdd(callback) {
     return function(err, data) {
@@ -47,7 +47,7 @@ function checkAdd(callback) {
         else {
             callback(null, data);
         }
-    }
+    };
 }
 
 exports.updateStory = function(token, id, name, isPublic, callback) {
@@ -55,11 +55,11 @@ exports.updateStory = function(token, id, name, isPublic, callback) {
     if (pseudo && id) {
         Story.update(pseudo, id, name, isPublic, callback);
     }
-}
+};
 
 exports.deleteStory = function(token, id, callback) {
     var pseudo = getPseudoFromToken(token);
     if (pseudo && id) {
         Story.delete(pseudo, id, callback);
     }
-}
+};

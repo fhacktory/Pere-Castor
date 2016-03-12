@@ -192,7 +192,7 @@ exports.getUserStories = getUserStories = function(event, context) {
                 context.succeed({
                     authorized: false,
                     result: 'NO_STORIES_FOR_USER'
-                })
+                });
             }
             else {
                 context.succeed({
@@ -200,11 +200,11 @@ exports.getUserStories = getUserStories = function(event, context) {
                     result: {
                         stories: res
                     }
-                })
+                });
             }
         }
     });
-}
+};
 
 getUserStories({
     token: token,
@@ -228,11 +228,11 @@ exports.addStory = addStory = function(event, context) {
                     result: {
                         stories: res
                     }
-                })
+                });
             }
         }
     });
-}
+};
 
 addStory({
     token: token,
@@ -250,7 +250,7 @@ exports.updateStory = updateStory = function(event, context) {
                 context.succeed({
                     authorized: false,
                     result: 'NO_STORY_PSEUDO_ID'
-                })
+                });
             }
             else {
                 context.succeed({
@@ -258,11 +258,11 @@ exports.updateStory = updateStory = function(event, context) {
                     result: {
                         stories: res
                     }
-                })
+                });
             }
         }
     });
-}
+};
 
 updateStory({
     token: token,
@@ -281,7 +281,7 @@ exports.deleteStory = deleteStory = function(event, context) {
                 context.succeed({
                     authorized: false,
                     result: 'NO_STORY_PSEUDO_ID'
-                })
+                });
             }
             else {
                 context.succeed({
@@ -289,11 +289,11 @@ exports.deleteStory = deleteStory = function(event, context) {
                     result: {
                         stories: res
                     }
-                })
+                });
             }
         }
     });
-}
+};
 
 deleteStory({
     token: token,
