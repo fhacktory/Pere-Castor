@@ -89,7 +89,7 @@ var Story = {
             },
             TableName: 'stories',
             AttributeUpdates: {
-                storyname: {
+                storyName: {
                     Action: "PUT",
                     Value: {
                         S: storyName

@@ -145,7 +145,6 @@ authenticate({
     password: 'titi'
 }, ctx);
 
-
 addStory({
     token: token,
     name: "myStory",
@@ -158,8 +157,8 @@ getUserStories({
 
 updateStory({
     token: token,
-    id: "myStory",
-    newName: "myStoryEdited",
+    id: "N1_9bHanl",
+    name: "myStoryEdited",
     isPublic: false
 }, ctx);
 
