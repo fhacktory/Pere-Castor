@@ -1,3 +1,4 @@
+var dbUtils = require('../../lib/dynamoUtils');
 var AWS = require('aws-sdk');
 AWS.config.update({
     region: 'us-west-2'
@@ -21,7 +22,11 @@ var Story = {
                 callback(err);
             }
             else {
-                callback(null, data);
+                callback(null, data.Items.map(function(i) {
+                    var obj = {};
+                    dbUtils.decodeValues(obj, i);
+                    return obj;
+                }));
             }
         });
     },
@@ -133,6 +138,6 @@ var Story = {
             }
         });
     }
-}
+};
 
 module.exports = Story;

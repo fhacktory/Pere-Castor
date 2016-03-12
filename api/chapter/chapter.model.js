@@ -158,7 +158,7 @@ var User = {
             });
         }
         else {
-            db.putItem(params, function(err, data) {
+            db.updateItem(params, function(err, data) {
                 if (err) {
                     callback(err);
                 }

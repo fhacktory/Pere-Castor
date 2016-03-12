@@ -16,7 +16,7 @@ function checkCredentials(password, callback) {
                 signJWT(data.pseudo, callback);
             }
             else {
-                callback(null, false);
+                callback(null, 0);
             }
         }
     };
@@ -30,7 +30,7 @@ function checkInscription(pseudo, callback) {
     return function(err, data) {
         if (err) {
             if (err.code == 'ConditionalCheckFailedException') {
-                callback(null, false);
+                callback(null, 1);
             }
             else {
                 callback(err);
