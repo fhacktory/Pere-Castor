@@ -175,7 +175,7 @@ deleteStory({
 
 
 
-var PageController = require('./api/story/page.controller');
+var PageController = require('./api/page/page.controller');
 
 var getPages, addPage, updatePage, deletePage;
 
@@ -236,7 +236,7 @@ exports.updatePage = updatePage = function(event, context) {
             if (res == false) {
                 context.succeed({
                     authorized: false,
-                    result: 'PAGE_EXISTS'
+                    result: 'PAGE_NOT_EXISTS'
                 })
             }
             else {
@@ -252,7 +252,7 @@ exports.updatePage = updatePage = function(event, context) {
 };
 
 exports.deletePage = deletePage = function(event, context) {
-    StoryController.deletePage(event.token, event.story, event.chapter, event.id, function(err, res) {
+    PageController.deletePage(event.token, event.story, event.chapter, event.id, function(err, res) {
         if (err) {
             context.fail(err);
         }
@@ -274,3 +274,49 @@ exports.deletePage = deletePage = function(event, context) {
         }
     });
 };
+
+
+
+addPage({
+    token: token,
+    story: "story",
+    chapter: "chapter",
+    title: "titre",
+    description: "desc",
+    text: "text",
+    image: null
+}, ctx);
+
+addPage({
+    token: token,
+    story: "story2",
+    chapter: "chapter2",
+    title: "titre",
+    description: "desc",
+    text: "text",
+    image: null
+}, ctx);
+
+getPages({
+    token: token,
+    story: "story",
+    chapter: "chapter",
+}, ctx);
+
+deletePage({
+    token: token,
+    story: "story",
+    chapter: "chapter",
+    id:"VyezCFDTnl"
+}, ctx);
+
+updatePage({
+    token: token,
+    story: "story",
+    chapter: "chapter",
+    id:"Vkx2B3w63l",
+    title: "titreEdit",
+    description: "descEdit",
+    text: "textEdit",
+    image: null
+}, ctx);
