@@ -3,25 +3,50 @@ var jwt = require('jsonwebtoken');
 var User = require('./user.model');
 
 exports.login = function(pseudo, mdp, callback) {
-    User.get(pseudo, verifyCredentials(mdp, callback));
-}
+    User.get(pseudo, checkCredentials(mdp, callback));
+};
 
-function verifyCredentials(password, callback) {
+function checkCredentials(password, callback) {
     return function(err, data) {
         if (err) {
             callback(err);
-        } else {
+        }
+        else {
             if (data && data.password == password) {
-            	// sign with default (HMAC SHA256) ->>>>> TODO use key file
-                var token = jwt.sign({
-                	pseudo: data.pseudo
-                }, '§%p3r3c4570r§%');
-                callback(null, {
-                    token: token
-                });
-            } else {
+                signJWT(data.pseudo, callback);
+            }
+            else {
                 callback(null, false);
             }
         }
-    }
+    };
+}
+
+exports.signup = function(pseudo, password, email, mainStory, callback) {
+    User.create(pseudo, password, email, mainStory, checkInscription(pseudo, callback));
+};
+
+function checkInscription(pseudo, callback) {
+    return function(err, data) {
+        if (err) {
+            if (err.code == 'ConditionalCheckFailedException') {
+                callback(null, false);
+            }
+            else {
+                callback(err);
+            }
+        }
+        else {
+            signJWT(pseudo, callback);
+        }
+    };
+}
+
+function signJWT(pseudo, callback) {
+    var token = jwt.sign({
+        pseudo: pseudo
+    }, '§%p3r3c4570r§%');
+    callback(null, {
+        token: token
+    });
 }
