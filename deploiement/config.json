@@ -1,0 +1,16 @@
+{
+	"nomLambda":{
+		"handler":"",
+		"method":"GET",
+		"params":[
+			{
+				"":""
+			}
+		],
+		"post":[
+			{
+				"":""
+			}
+		],
+	}
+}
