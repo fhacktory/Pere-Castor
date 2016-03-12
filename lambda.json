@@ -1,0 +1,274 @@
+{
+    "Functions": [
+        {
+            "Version": "$LATEST", 
+            "CodeSha256": "knfAbm5MeXMzxB3sNke0A5cHDgrjMUaXySI3cmr8DfE=", 
+            "FunctionName": "perecastor_getChapter", 
+            "VpcConfig": {
+                "SubnetIds": [], 
+                "SecurityGroupIds": []
+            }, 
+            "MemorySize": 128, 
+            "CodeSize": 217, 
+            "FunctionArn": "arn:aws:lambda:us-west-2:857382743923:function:perecastor_getChapter", 
+            "Handler": "index.handler", 
+            "Role": "arn:aws:iam::857382743923:role/lambda_dynamodb", 
+            "Timeout": 3, 
+            "LastModified": "2016-03-12T20:52:46.792+0000", 
+            "Runtime": "nodejs", 
+            "Description": ""
+        }, 
+        {
+            "Version": "$LATEST", 
+            "CodeSha256": "UFhGHinWPC11IX4Vu4944I1oLbd6Vg3uWYj1XnjbkXI=", 
+            "FunctionName": "perecastor_createStory", 
+            "VpcConfig": {
+                "SubnetIds": [], 
+                "SecurityGroupIds": []
+            }, 
+            "MemorySize": 128, 
+            "CodeSize": 217, 
+            "FunctionArn": "arn:aws:lambda:us-west-2:857382743923:function:perecastor_createStory", 
+            "Handler": "index.handler", 
+            "Role": "arn:aws:iam::857382743923:role/lambda_dynamodb", 
+            "Timeout": 3, 
+            "LastModified": "2016-03-12T20:09:00.889+0000", 
+            "Runtime": "nodejs", 
+            "Description": ""
+        }, 
+        {
+            "Version": "$LATEST", 
+            "CodeSha256": "NwRCGA7IqF63Z7egcK4w8vl+kEhA68yG9QhoscwAgtE=", 
+            "FunctionName": "perecastor_updatePage", 
+            "VpcConfig": {
+                "SubnetIds": [], 
+                "SecurityGroupIds": []
+            }, 
+            "MemorySize": 128, 
+            "CodeSize": 217, 
+            "FunctionArn": "arn:aws:lambda:us-west-2:857382743923:function:perecastor_updatePage", 
+            "Handler": "index.handler", 
+            "Role": "arn:aws:iam::857382743923:role/lambda_dynamodb", 
+            "Timeout": 3, 
+            "LastModified": "2016-03-12T21:20:35.349+0000", 
+            "Runtime": "nodejs", 
+            "Description": ""
+        }, 
+        {
+            "Version": "$LATEST", 
+            "CodeSha256": "K4FC0pPrlsGd0XRVGsAq2IrnE8NhVYnol/VsnED16is=", 
+            "FunctionName": "perecastor_getStories", 
+            "VpcConfig": {
+                "SubnetIds": [], 
+                "SecurityGroupIds": []
+            }, 
+            "MemorySize": 128, 
+            "CodeSize": 217, 
+            "FunctionArn": "arn:aws:lambda:us-west-2:857382743923:function:perecastor_getStories", 
+            "Handler": "index.handler", 
+            "Role": "arn:aws:iam::857382743923:role/lambda_dynamodb", 
+            "Timeout": 3, 
+            "LastModified": "2016-03-12T20:08:18.205+0000", 
+            "Runtime": "nodejs", 
+            "Description": ""
+        }, 
+        {
+            "Version": "$LATEST", 
+            "CodeSha256": "rd/FIdbux/N9XfAJAF7uVFjSTRMia53dEVauudHngWk=", 
+            "FunctionName": "perecastor_deleteStory", 
+            "VpcConfig": {
+                "SubnetIds": [], 
+                "SecurityGroupIds": []
+            }, 
+            "MemorySize": 128, 
+            "CodeSize": 217, 
+            "FunctionArn": "arn:aws:lambda:us-west-2:857382743923:function:perecastor_deleteStory", 
+            "Handler": "index.handler", 
+            "Role": "arn:aws:iam::857382743923:role/lambda_dynamodb", 
+            "Timeout": 3, 
+            "LastModified": "2016-03-12T20:32:19.417+0000", 
+            "Runtime": "nodejs", 
+            "Description": ""
+        }, 
+        {
+            "Version": "$LATEST", 
+            "CodeSha256": "18M1TYmfPNuwIAXFJbApg1B6QCSNB//yv9R7A+Le6/I=", 
+            "FunctionName": "perecastor_updateStory", 
+            "VpcConfig": {
+                "SubnetIds": [], 
+                "SecurityGroupIds": []
+            }, 
+            "MemorySize": 128, 
+            "CodeSize": 217, 
+            "FunctionArn": "arn:aws:lambda:us-west-2:857382743923:function:perecastor_updateStory", 
+            "Handler": "index.handler", 
+            "Role": "arn:aws:iam::857382743923:role/lambda_dynamodb", 
+            "Timeout": 3, 
+            "LastModified": "2016-03-12T20:18:03.316+0000", 
+            "Runtime": "nodejs", 
+            "Description": ""
+        }, 
+        {
+            "Version": "$LATEST", 
+            "CodeSha256": "N1fmeuC1wmPNAQ9A3mty6C6uA4Cd5O93VZEOEBcAV1I=", 
+            "FunctionName": "test", 
+            "VpcConfig": {
+                "SubnetIds": [], 
+                "SecurityGroupIds": []
+            }, 
+            "MemorySize": 128, 
+            "CodeSize": 340, 
+            "FunctionArn": "arn:aws:lambda:us-west-2:857382743923:function:test", 
+            "Handler": "index.handler", 
+            "Role": "arn:aws:iam::857382743923:role/lambda_dynamodb", 
+            "Timeout": 3, 
+            "LastModified": "2016-03-12T13:39:07.883+0000", 
+            "Runtime": "nodejs", 
+            "Description": "A starter AWS Lambda function."
+        }, 
+        {
+            "Version": "$LATEST", 
+            "CodeSha256": "ukkeJDskfGG4DhLqc+7FLQxGyaxyuiJ1zlF3NyOnY/w=", 
+            "FunctionName": "perecastor_createPage", 
+            "VpcConfig": {
+                "SubnetIds": [], 
+                "SecurityGroupIds": []
+            }, 
+            "MemorySize": 128, 
+            "CodeSize": 217, 
+            "FunctionArn": "arn:aws:lambda:us-west-2:857382743923:function:perecastor_createPage", 
+            "Handler": "index.handler", 
+            "Role": "arn:aws:iam::857382743923:role/lambda_dynamodb", 
+            "Timeout": 3, 
+            "LastModified": "2016-03-12T21:07:29.839+0000", 
+            "Runtime": "nodejs", 
+            "Description": ""
+        }, 
+        {
+            "Version": "$LATEST", 
+            "CodeSha256": "oNEg4NuAg6RueFTDf72bR9tZwFbQhJA3JflG4ta0geI=", 
+            "FunctionName": "perecastor_updatechapter", 
+            "VpcConfig": {
+                "SubnetIds": [], 
+                "SecurityGroupIds": []
+            }, 
+            "MemorySize": 128, 
+            "CodeSize": 217, 
+            "FunctionArn": "arn:aws:lambda:us-west-2:857382743923:function:perecastor_updatechapter", 
+            "Handler": "index.handler", 
+            "Role": "arn:aws:iam::857382743923:role/lambda_dynamodb", 
+            "Timeout": 3, 
+            "LastModified": "2016-03-12T21:03:06.016+0000", 
+            "Runtime": "nodejs", 
+            "Description": ""
+        }, 
+        {
+            "Version": "$LATEST", 
+            "CodeSha256": "gL1Gqalj5KXsdBUgDiP+/Cj4a+A+SqXCZGSskPcZ9a4=", 
+            "FunctionName": "perecastor_deletePage", 
+            "VpcConfig": {
+                "SubnetIds": [], 
+                "SecurityGroupIds": []
+            }, 
+            "MemorySize": 128, 
+            "CodeSize": 217, 
+            "FunctionArn": "arn:aws:lambda:us-west-2:857382743923:function:perecastor_deletePage", 
+            "Handler": "index.handler", 
+            "Role": "arn:aws:iam::857382743923:role/lambda_dynamodb", 
+            "Timeout": 3, 
+            "LastModified": "2016-03-12T21:18:13.466+0000", 
+            "Runtime": "nodejs", 
+            "Description": ""
+        }, 
+        {
+            "Version": "$LATEST", 
+            "CodeSha256": "acg7f+LMj5p3ulHk0kBbevucQs/ewXPhs6v7i5RLY70=", 
+            "FunctionName": "perecastor_deleteChapter", 
+            "VpcConfig": {
+                "SubnetIds": [], 
+                "SecurityGroupIds": []
+            }, 
+            "MemorySize": 128, 
+            "CodeSize": 217, 
+            "FunctionArn": "arn:aws:lambda:us-west-2:857382743923:function:perecastor_deleteChapter", 
+            "Handler": "index.handler", 
+            "Role": "arn:aws:iam::857382743923:role/lambda_dynamodb", 
+            "Timeout": 3, 
+            "LastModified": "2016-03-12T21:00:05.249+0000", 
+            "Runtime": "nodejs", 
+            "Description": ""
+        }, 
+        {
+            "Version": "$LATEST", 
+            "CodeSha256": "Cap0fabsdTlJJ9QVZC7J8EEgXB1Ff5130yPWwcKntWM=", 
+            "FunctionName": "perecastor_createChapter", 
+            "VpcConfig": {
+                "SubnetIds": [], 
+                "SecurityGroupIds": []
+            }, 
+            "MemorySize": 128, 
+            "CodeSize": 217, 
+            "FunctionArn": "arn:aws:lambda:us-west-2:857382743923:function:perecastor_createChapter", 
+            "Handler": "index.handler", 
+            "Role": "arn:aws:iam::857382743923:role/lambda_dynamodb", 
+            "Timeout": 3, 
+            "LastModified": "2016-03-12T20:56:37.005+0000", 
+            "Runtime": "nodejs", 
+            "Description": ""
+        }, 
+        {
+            "Version": "$LATEST", 
+            "CodeSha256": "NceYlbojfnDUUKHDS7cUk/14+GJ3KakwDxbPgoOJ57I=", 
+            "FunctionName": "perecastor_getPages", 
+            "VpcConfig": {
+                "SubnetIds": [], 
+                "SecurityGroupIds": []
+            }, 
+            "MemorySize": 128, 
+            "CodeSize": 217, 
+            "FunctionArn": "arn:aws:lambda:us-west-2:857382743923:function:perecastor_getPages", 
+            "Handler": "index.handler", 
+            "Role": "arn:aws:iam::857382743923:role/lambda_dynamodb", 
+            "Timeout": 3, 
+            "LastModified": "2016-03-12T21:14:33.155+0000", 
+            "Runtime": "nodejs", 
+            "Description": ""
+        }, 
+        {
+            "Version": "$LATEST", 
+            "CodeSha256": "h+ILLE6A4QFaUt2AYSQwpj/EnfvLkmJ1ztPajvymwJ4=", 
+            "FunctionName": "perecastor_createuser", 
+            "VpcConfig": {
+                "SubnetIds": [], 
+                "SecurityGroupIds": []
+            }, 
+            "MemorySize": 128, 
+            "CodeSize": 218, 
+            "FunctionArn": "arn:aws:lambda:us-west-2:857382743923:function:perecastor_createuser", 
+            "Handler": "index.handler", 
+            "Role": "arn:aws:iam::857382743923:role/lambda_dynamodb", 
+            "Timeout": 3, 
+            "LastModified": "2016-03-12T21:37:54.966+0000", 
+            "Runtime": "nodejs", 
+            "Description": ""
+        }, 
+        {
+            "Version": "$LATEST", 
+            "CodeSha256": "WQKyaXyP5B+br7sdjUM7yWxFDPlC2a5FzmHSCgoYSyo=", 
+            "FunctionName": "perecastor_authenticate", 
+            "VpcConfig": {
+                "SubnetIds": [], 
+                "SecurityGroupIds": []
+            }, 
+            "MemorySize": 128, 
+            "CodeSize": 217, 
+            "FunctionArn": "arn:aws:lambda:us-west-2:857382743923:function:perecastor_authenticate", 
+            "Handler": "index.handler", 
+            "Role": "arn:aws:iam::857382743923:role/lambda_dynamodb", 
+            "Timeout": 3, 
+            "LastModified": "2016-03-12T20:08:24.472+0000", 
+            "Runtime": "nodejs", 
+            "Description": ""
+        }
+    ]
+}
