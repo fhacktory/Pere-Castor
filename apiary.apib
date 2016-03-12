@@ -12,16 +12,265 @@ Polls is a simple API allowing consumers to view polls and vote in them.
 + Request (application/json)
 
         {
-            "login": "foo",
+            "pseudo": "foo",
             "password": "bar"
         }
 
 + Response 200 (application/json)
 
         {
-            id: "15ds1xc",
-            token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NDY1MDViMDFmYTAzYmUwMTUxMDYwOWIiLCJuYW1lIjoiTmljayBDZXJtaW5hcmEiLCJwYXNzd29yZCI6InBhc3N3b3JkIiwiYWRtaW4iOnRydWUsIl9fdiI6MH0.ah-NFQ1967WVeN6lYNAahT7hZtshG6kw6AW3ncuJOYw"
+            "authorized": true,
+            "result": {
+                "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NDY1MDViMDFmYTAzYmUwMTUxMDYwOWIiLCJuYW1lIjoiTmljayBDZXJtaW5hcmEiLCJwYXNzd29yZCI6InBhc3N3b3JkIiwiYWRtaW4iOnRydWUsIl9fdiI6MH0.ah-NFQ1967WVeN6lYNAahT7hZtshG6kw6AW3ncuJOYw"
+            }
         }
+
++ Response 401 (application/json)
+
+        {
+            "authorized": false,
+            "result": "INVALID_CREDENTIALS"
+        }
+
+## User Collection [/api/users]
+
+### Create a user [POST /api/users/]
+
++ Request (application/json)
+
+        {
+            "pseudo": "foo",
+            "password": "bar",
+            "email": "foo@bar.fr",
+            "mainStory": "foobar"
+        }
+
++ Response 200 (application/json)
+
+        {
+            "authorized": true,
+            "result": {
+                "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NDY1MDViMDFmYTAzYmUwMTUxMDYwOWIiLCJuYW1lIjoiTmljayBDZXJtaW5hcmEiLCJwYXNzd29yZCI6InBhc3N3b3JkIiwiYWRtaW4iOnRydWUsIl9fdiI6MH0.ah-NFQ1967WVeN6lYNAahT7hZtshG6kw6AW3ncuJOYw"
+            }
+        }
+
++ Response 409 (application/json)
+
+        {
+            "authorized": true,
+            "result": {
+                "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NDY1MDViMDFmYTAzYmUwMTUxMDYwOWIiLCJuYW1lIjoiTmljayBDZXJtaW5hcmEiLCJwYXNzd29yZCI6InBhc3N3b3JkIiwiYWRtaW4iOnRydWUsIl9fdiI6MH0.ah-NFQ1967WVeN6lYNAahT7hZtshG6kw6AW3ncuJOYw"
+            }
+        }
+
+## Stories Collection [/api/users/{id}/stories]
+
++ Parameters
+    + id = `` (required, string) ... id of the user
+
+### Retrieve all stories for a user [GET /api/users/{id}/stories?token={token}]
+
++ Parameters
+    + token = `` (required, string) ... token
+
++ Response 200 (application/json)
+
+        [
+            {
+                id: "g1q5dsfr3g",
+                name: "Test",
+                public: true,
+                nbRead: 2
+            },
+                            {
+                id: "1fh5s2n5d5",
+                name: "Test 1",
+                public: true,
+                nbRead: 15
+            },
+                            {
+                id: "1vds4fv1ds",
+                name: "Test 2",
+                public: false,
+                nbRead: 0
+            }
+        ]
+
++ Response 401 (application/json)
+
+
++ Response 403 (application/json)
+
+
+### Create a new story [POST /api/users/{id}/stories]
+
++ Request (application/json)
+
+        {
+            token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NDY1MDViMDFmYTAzYmUwMTUxMDYwOWIiLCJuYW1lIjoiTmljayBDZXJtaW5hcmEiLCJwYXNzd29yZCI6InBhc3N3b3JkIiwiYWRtaW4iOnRydWUsIl9fdiI6MH0.ah-NFQ1967WVeN6lYNAahT7hZtshG6kw6AW3ncuJOYw",
+            story: {
+                    name: "Test",
+                    public: true,
+                    nbRead: 2
+            }
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+    
+            Location: /api/users/{id}/stories/{storyId}
+
+    + Body
+    
+            {
+                id: "g1q5dsfr3g",
+                name: "Test",
+                public: true,
+                nbRead: 2
+            }
+
++ Response 404 (application/json)
+
+
++ Response 409 (application/json)
+
+
+### Update a story [PUT /api/users/{id}/stories/{storyId}]
+
++ Parameters
+    + storyId = `` (required, string) ... id of the story
+
++ Request (application/json)
+
+        {
+            token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NDY1MDViMDFmYTAzYmUwMTUxMDYwOWIiLCJuYW1lIjoiTmljayBDZXJtaW5hcmEiLCJwYXNzd29yZCI6InBhc3N3b3JkIiwiYWRtaW4iOnRydWUsIl9fdiI6MH0.ah-NFQ1967WVeN6lYNAahT7hZtshG6kw6AW3ncuJOYw",
+            story: {
+                id: "g1q5dsfr3g",
+                name: "Test",
+                public: true,
+                nbRead: 2
+            }
+        }
+
++ Response 200 (application/json)
+
+
++ Response 204 (application/json)
+
+
++ Response 404 (application/json)
+
+
+### Delete a story [DELETE /api/users/{id}/stories/{storyId}?token={token}]
+
++ Parameters
+    + token = `` (required, string) ... token
+    + storyId = `` (required, string) ... id of the story
+
++ Response 200 (application/json)
+
+
++ Response 404 (application/json)
+
+## Chapters Collection [/api/users/{id}/stories/{storyId}/chapters]
+
++ Parameters
+    + storyId =  `` (required, string) ... id of the story
+
+### Retrieve all chapter for a story [GET /api/users/{id}/stories/{storyId}/chapters?token={token}]
+
++ Parameters
+    + token = `` (required, string) ... token
+
++ Response 200 (application/json)
+
+        [
+            {
+                id: "g1q5dsfr3g",
+                name: "Chapter 1",
+                createdAt: "2015-12-15T13:39:00",
+                index:"0"
+            },
+                            {
+                id: "1fh5s2n5d5",
+                name: "Chapter 2",
+                createdAt: "2015-12-15T13:39:50",
+                index:"1"
+            },
+                            {
+                id: "1vds4fv1ds",
+                name: "Chapter 3",
+                createdAt: "2015-12-15T13:39:50",
+                index:"2"
+            }
+        ]
+
++ Response 401 (application/json)
+
+
++ Response 403 (application/json)
+
+
+### Create a new chapter in a story [POST /api/users/{id}/stories/{storyId}/chapters]
+
++ Request (application/json)
+
+        {
+            token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NDY1MDViMDFmYTAzYmUwMTUxMDYwOWIiLCJuYW1lIjoiTmljayBDZXJtaW5hcmEiLCJwYXNzd29yZCI6InBhc3N3b3JkIiwiYWRtaW4iOnRydWUsIl9fdiI6MH0.ah-NFQ1967WVeN6lYNAahT7hZtshG6kw6AW3ncuJOYw",
+            chapter : {
+                name: "Chapter 1",
+                index:"0"
+            }
+        }
+
++ Response 201 (application/json)
+
+        {
+            id: "g1q5dsfr3g"
+        }
+
++ Response 401 (application/json)
+
+
++ Response 403 (application/json)
+
+
+### Update a chapter [PUT /api/users/{id}/stories/{storyId}/chapters/{chapterId}]
+
++ Parameters
+    + storyId = `` (required, string) ... id of the story
+    + chapterId =  `` (required, string) ... code of the chapter
+    
++ Request (application/json)
+
+        {
+            token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NDY1MDViMDFmYTAzYmUwMTUxMDYwOWIiLCJuYW1lIjoiTmljayBDZXJtaW5hcmEiLCJwYXNzd29yZCI6InBhc3N3b3JkIiwiYWRtaW4iOnRydWUsIl9fdiI6MH0.ah-NFQ1967WVeN6lYNAahT7hZtshG6kw6AW3ncuJOYw",
+            chapter : {
+                id:id: "g1q5dsfr3g",
+                name: "Chapter 1",
+                index:"0"
+            }
+        }
+
++ Response 200 (application/json)
+
+
++ Response 401 (application/json)
+
+
++ Response 403 (application/json)
+
+
+### Delete a chapter [DELETE /api/users/{id}/stories/{storyId}/chapters/{chapterId}?token={token}]
+
++ Parameters
+    + token = `` (required, string) ... token
+    + storyId = `` (required, string) ... id of the story
+    + chapterId = `` (required, string) ... id of the chapter
+
++ Response 200 (application/json)
+
 
 + Response 401 (application/json)
 
