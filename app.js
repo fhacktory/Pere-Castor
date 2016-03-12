@@ -157,7 +157,7 @@ getUserStories({
 
 updateStory({
     token: token,
-    id: "N1_9bHanl",
+    id: "41XZXL63l",
     name: "myStoryEdited",
     isPublic: false
 }, ctx);
@@ -168,5 +168,109 @@ getUserStories({
 
 deleteStory({
     token: token,
-    id: "EkBJ9Vphe"
+    id: "N1_9bHanl"
 }, ctx);
+
+
+
+
+
+var PageController = require('./api/story/page.controller');
+
+var getPages, addPage, updatePage, deletePage;
+
+exports.getPages = getPages = function(event, context) {
+    PageController.getPages(event.token, event.story, event.chapter, function(err, res) {
+        if (err) {
+            context.fail(err);
+        }
+        else {
+            if (res == false) {
+                context.succeed({
+                    authorized: false,
+                    result: 'NO_PAGE_CODE_CHAPTER'
+                })
+            }
+            else {
+                context.succeed({
+                    authorized: true,
+                    result: {
+                        stories: res
+                    }
+                })
+            }
+        }
+    });
+};
+
+exports.addPage = addPage = function(event, context) {
+    PageController.addPage(event.token, event.story, event.chapter, event.title, event.description, event.text, event.image, function(err, res) {
+        if (err) {
+            context.fail(err);
+        }
+        else {
+            if (res == false) {
+                context.succeed({
+                    authorized: false,
+                    result: 'PAGE_EXISTS'
+                })
+            }
+            else {
+                context.succeed({
+                    authorized: true,
+                    result: {
+                        stories: res
+                    }
+                })
+            }
+        }
+    });
+};
+
+exports.updatePage = updatePage = function(event, context) {
+    PageController.updatePage(event.token, event.story, event.chapter, event.id, event.title, event.description, event.text, event.image, function(err, res) {
+        if (err) {
+            context.fail(err);
+        }
+        else {
+            if (res == false) {
+                context.succeed({
+                    authorized: false,
+                    result: 'PAGE_EXISTS'
+                })
+            }
+            else {
+                context.succeed({
+                    authorized: true,
+                    result: {
+                        stories: res
+                    }
+                })
+            }
+        }
+    });
+};
+
+exports.deletePage = deletePage = function(event, context) {
+    StoryController.deletePage(event.token, event.story, event.chapter, event.id, function(err, res) {
+        if (err) {
+            context.fail(err);
+        }
+        else {
+            if (res == false) {
+                context.succeed({
+                    authorized: false,
+                    result: 'PAGE_NOT_EXISTS'
+                })
+            }
+            else {
+                context.succeed({
+                    authorized: true,
+                    result: {
+                        stories: res
+                    }
+                })
+            }
+        }
+    });
+};
