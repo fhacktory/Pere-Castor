@@ -99,6 +99,7 @@ var Story = {
                 }
             },
             TableName: 'stories',
+            AttributeUpdates: {}
         };
         if (storyName) {
             params.AttributeUpdates.storyName = {
