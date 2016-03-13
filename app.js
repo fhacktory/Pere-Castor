@@ -162,7 +162,7 @@ exports.getUserStories = getUserStories = function(event, context) {
 };
 
 exports.addStory = addStory = function(event, context) {
-    StoryController.addStory(event.token, event.name, event.isPublic, function(err, res) {
+    StoryController.addStory(event.token, event.name, event.isPublic, event.index, function(err, res) {
         if (err) {
             return context.fail(err);
         }
@@ -178,7 +178,7 @@ exports.addStory = addStory = function(event, context) {
 };
 
 exports.updateStory = updateStory = function(event, context) {
-    StoryController.updateStory(event.token, event.id, event.name, event.isPublic, function(err, res) {
+    StoryController.updateStory(event.token, event.id, event.name, event.isPublic, event.index, function(err, res) {
         if (err) {
             return context.fail(err);
         }
@@ -226,7 +226,7 @@ exports.getPages = getPages = function(event, context) {
 };
 
 exports.addPage = addPage = function(event, context) {
-    PageController.addPage(event.token, event.story, event.chapter, event.title, event.description, event.text, event.image, function(err, res) {
+    PageController.addPage(event.token, event.story, event.chapter, event.title, event.description, event.text, event.image, event.index, function(err, res) {
         if (err) {
             return context.fail(err);
         }
@@ -242,7 +242,7 @@ exports.addPage = addPage = function(event, context) {
 };
 
 exports.updatePage = updatePage = function(event, context) {
-    PageController.updatePage(event.token, event.story, event.chapter, event.id, event.title, event.description, event.text, event.image, function(err, res) {
+    PageController.updatePage(event.token, event.story, event.chapter, event.id, event.title, event.description, event.text, event.image, event.index, function(err, res) {
         if (err) {
             return context.fail(err);
         }
