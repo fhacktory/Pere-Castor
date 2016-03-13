@@ -111,7 +111,7 @@ exports.createChapter = createChapter = function(event, context) {
 };
 
 exports.updateChapter = updateChapter = function(event, context) {
-    ChapterController.updateChapter(event.token, event.storyId, event.chapter.id, event.chapter.chapterName, event.chapter.index, event.chapter.image, function(err, res) {
+    ChapterController.updateChapter(event.token, event.storyId, event.chapterId, event.chapter.chapterName, event.chapter.index, event.chapter.image, function(err, res) {
         if (err) {
             return context.fail(err);
         }
@@ -127,7 +127,7 @@ exports.updateChapter = updateChapter = function(event, context) {
 };
 
 exports.deleteChapter = deleteChapter = function(event, context) {
-    ChapterController.deleteChapter(event.token, event.storyId, event.chapter.id, function(err, res) {
+    ChapterController.deleteChapter(event.token, event.storyId, event.chapterId, function(err, res) {
         if (err) {
             return context.fail(err);
         }
@@ -162,7 +162,7 @@ exports.getUserStories = getUserStories = function(event, context) {
 };
 
 exports.addStory = addStory = function(event, context) {
-    StoryController.addStory(event.token, event.name, event.isPublic, event.index, function(err, res) {
+    StoryController.addStory(event.token, event.story.storyName, event.story.public, event.story.index, function(err, res) {
         if (err) {
             return context.fail(err);
         }
@@ -178,7 +178,7 @@ exports.addStory = addStory = function(event, context) {
 };
 
 exports.updateStory = updateStory = function(event, context) {
-    StoryController.updateStory(event.token, event.id, event.name, event.isPublic, event.index, function(err, res) {
+    StoryController.updateStory(event.token, event.storyId,  event.story.storyName, event.story.public, event.story.index, function(err, res) {
         if (err) {
             return context.fail(err);
         }
@@ -194,7 +194,7 @@ exports.updateStory = updateStory = function(event, context) {
 };
 
 exports.deleteStory = deleteStory = function(event, context) {
-    StoryController.deleteStory(event.token, event.id, function(err, res) {
+    StoryController.deleteStory(event.token, event.storyId, function(err, res) {
         if (err) {
             return context.fail(err);
         }
@@ -210,7 +210,7 @@ exports.deleteStory = deleteStory = function(event, context) {
 };
 
 exports.getPages = getPages = function(event, context) {
-    PageController.getPages(event.token, event.story, event.chapter, function(err, res) {
+    PageController.getPages(event.token, event.storyId, event.chapterId, function(err, res) {
         if (err) {
             return context.fail(err);
         }
@@ -226,7 +226,7 @@ exports.getPages = getPages = function(event, context) {
 };
 
 exports.addPage = addPage = function(event, context) {
-    PageController.addPage(event.token, event.story, event.chapter, event.title, event.description, event.text, event.image, event.index, function(err, res) {
+    PageController.addPage(event.token, event.storyId, event.chapterId, event.page.title, event.page.description, event.page.text, event.page.image, event.page.index, function(err, res) {
         if (err) {
             return context.fail(err);
         }
@@ -242,7 +242,7 @@ exports.addPage = addPage = function(event, context) {
 };
 
 exports.updatePage = updatePage = function(event, context) {
-    PageController.updatePage(event.token, event.story, event.chapter, event.id, event.title, event.description, event.text, event.image, event.index, function(err, res) {
+    PageController.updatePage(event.token, event.storyId, event.chapterId, event.pageId, event.page.title, event.page.description, event.page.text, event.page.image, event.page.index, function(err, res) {
         if (err) {
             return context.fail(err);
         }
@@ -258,7 +258,7 @@ exports.updatePage = updatePage = function(event, context) {
 };
 
 exports.deletePage = deletePage = function(event, context) {
-    PageController.deletePage(event.token, event.story, event.chapter, event.id, function(err, res) {
+    PageController.deletePage(event.token, event.storyId, event.chapterId, event.pageId, function(err, res) {
         if (err) {
             return context.fail(err);
         }
