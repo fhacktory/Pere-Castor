@@ -51,7 +51,7 @@ var Story = {
             }
         });
     },
-    add: function(pseudo, name, isPublic, callback) {
+    add: function(pseudo, name, isPublic, index, callback) {
         var params = {
             Item: {
                 id: {
@@ -68,6 +68,9 @@ var Story = {
                 },
                 date: {
                     N: Date.now().toString()
+                },
+                index: {
+                    N: index.toString()
                 }
             },
             TableName: 'stories',
@@ -82,7 +85,7 @@ var Story = {
             }
         });
     },
-    update: function(pseudo, id, storyName, isPublic, callback) {
+    update: function(pseudo, id, storyName, isPublic, index, callback) {
         var params = {
             Key: {
                 code: {
@@ -93,21 +96,30 @@ var Story = {
                 }
             },
             TableName: 'stories',
-            AttributeUpdates: {
-                storyName: {
-                    Action: "PUT",
-                    Value: {
-                        S: storyName
-                    }
-                },
-                public: {
-                    Action: "PUT",
-                    Value: {
-                        BOOL: isPublic
-                    }
-                }
-            }
         };
+        if (storyName) {
+            params.AttributeUpdates.storyName = {
+                Action: 'PUT',
+                Value: {
+                    S: storyName
+                }
+            };
+        }
+        if (index) {
+            params.AttributeUpdates.index = {
+                Action: 'PUT',
+                Value: {
+                    N: index.toString()
+                }
+            };
+        }if (isPublic) {
+            params.AttributeUpdates.public = {
+                Action: 'PUT',
+                Value: {
+                    BOOL: isPublic
+                }
+            };
+        }
         db.updateItem(params, function(err, data) {
             if (err) {
                 callback(err);

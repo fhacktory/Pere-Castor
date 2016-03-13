@@ -36,10 +36,11 @@ exports.getStory = function(token, id, callback) {
     }
 };
 
-exports.addStory = function(token, name, isPublic, callback) {
+exports.addStory = function(token, name, isPublic, index, callback) {
     var pseudo = getCode(token);
+
     if (pseudo && name) {
-        Story.add(pseudo, name, isPublic, checkAdd(callback));
+        Story.add(pseudo, name, isPublic, index, checkAdd(callback));
     }
     else {
         callback(null, 0);
@@ -62,10 +63,11 @@ function checkAdd(callback) {
     };
 }
 
-exports.updateStory = function(token, id, name, isPublic, callback) {
+exports.updateStory = function(token, id, name, isPublic, index, callback) {
     var pseudo = getCode(token);
+
     if (pseudo && id) {
-        Story.update(pseudo, id, name, isPublic, callback);
+        Story.update(pseudo, id, name, isPublic, index, callback);
     }
     else {
         callback(null, 0);

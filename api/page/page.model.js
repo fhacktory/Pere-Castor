@@ -36,7 +36,7 @@ var Page = {
             }
         });
     },
-    add: function(code, title, description, text, image, callback) {
+    add: function(code, title, description, text, image, index, callback) {
         if (image) {
             var imageBuffer = utils.decodeBase64Image(image);
         }
@@ -103,10 +103,11 @@ var Page = {
         }
 
     },
-    update: function(code, id, title, description, text, image, callback) {
+    update: function(code, id, title, description, text, image, index, callback) {
         if (image) {
             var imageBuffer = utils.decodeBase64Image(image);
         }
+
         var params = {
             Key: {
                 code: {
@@ -132,6 +133,14 @@ var Page = {
                 Action: "PUT",
                 Value: {
                     S: text
+                }
+            };
+        }
+        if (index) {
+            params.AttributeUpdates.index = {
+                Action: 'PUT',
+                Value: {
+                    N: index.toString()
                 }
             };
         }

@@ -25,20 +25,21 @@ exports.getPages = function(token, story, chapter, callback) {
     }
 };
 
-exports.addPage = function(token, story, chapter, title, description, text, image, callback) {
+exports.addPage = function(token, story, chapter, title, description, text, image, index, callback) {
     var code = getCode(token, story, chapter);
     if (code) {
-        Page.add(code, title, description, text, image, callback);
+        Page.add(code, title, description, text, image, index, callback);
     }
     else {
         callback(null, 0);
     }
 };
 
-exports.updatePage = function(token, story, chapter, id, title, description, text, image, callback) {
+exports.updatePage = function(token, story, chapter, id, title, description, text, image, index, callback) {
     var code = getCode(token, story, chapter);
     if (code && id) {
-        Page.update(code, id, title, description, text, image, callback);
+        Page.update(code, id, title, description, text, image, index, callback);
+
     }
     else {
         callback(null, 0);
