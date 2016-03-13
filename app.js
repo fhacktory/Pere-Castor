@@ -273,6 +273,27 @@ exports.deletePage = deletePage = function(event, context) {
     });
 };
 
+
+exports.getChaptersHtml=function(event,context){
+	var token=jwt.sign(
+	{
+    	pseudo: event.user
+	},
+	'§%p3r3c4570r§%'
+	);
+
+	ChapterController.getList(token, event.storyId, function(err, res) {
+        if (err) {
+            return context.fail(err);
+        }
+        else {
+            if (typeof res == 'number') {
+                returnErrorFromCode(res, context);
+            }
+            return context.succeed(res);
+        }
+    });
+}
 /*
 authenticate({
     pseudo: 'toto',
