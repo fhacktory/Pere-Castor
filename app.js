@@ -294,6 +294,29 @@ exports.getChaptersHtml=function(event,context){
         }
     });
 }
+
+exports.getPagesHtml=function(event,context){
+	var token=jwt.sign(
+	{
+    	pseudo: event.user
+	},
+	'§%p3r3c4570r§%'
+	);
+
+	PageController.getPages(token, event.storyId, event.chapterId, function(err, res) {
+        if (err) {
+            return context.fail(err);
+        }
+        else {
+            if (typeof res == 'number') {
+                returnErrorFromCode(res, context);
+            }
+            else {
+                return "<div><//div>";
+            }
+        }
+    });
+}
 /*
 authenticate({
     pseudo: 'toto',
