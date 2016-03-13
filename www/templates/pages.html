@@ -1,0 +1,28 @@
+<ion-view title="Pages">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+       <form class="list">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" placeholder="" ng-change="filter()" ng-model="utils.filterStr">
+            </label>
+        </form>
+        <div class="button-bar">
+            <button class="button button-positive  button-block icon ion-android-add" ng-click="addNew()"></button>
+            <button class="button button-positive  button-block icon ion-android-sync"ng-click="syncAll()"></button>
+        </div>
+        <ion-list>
+            <ion-item ng-repeat="page in filteredPages">
+                <input type="text" placeholder="" ng-model="page.title">
+                 <input type="text" placeholder="" ng-model="page.description">
+                  <input type="text" placeholder="" ng-model="page.text">
+                <button class="button icon ion-android-image" ng-click="getImage(page)"></button>
+                <img ng-src="{{page.image}}" style="max-height:100px; max-width:100px"/>
+                <label class="item item-input">
+                    <span>Created at {{page.createdAt}}</span>
+                </label>
+                <button class="button icon ion-android-delete" ng-click="delete(page)" ng-disabled="working"></button>
+                <button class="button icon ion-android-sync" ng-click="sync(page)" ng-disabled="working"></button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

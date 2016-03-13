@@ -1,0 +1,27 @@
+<ion-view title="Chapters">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <form class="list">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="search" placeholder="" ng-change="filter()" ng-model="utils.filterStr">
+            </label>
+        </form>
+        <div class="button-bar">
+            <button class="button button-positive  button-block icon ion-android-add" ng-click="addNew()"></button>
+            <button class="button button-positive  button-block icon ion-android-sync"ng-click="syncAll()"></button>
+        </div>
+        <ion-list>
+            <ion-item ng-repeat="chapter in filteredChapters">
+                <input type="text" placeholder="" ng-model="chapter.chapterName">
+                <button class="button icon ion-android-image" ng-click="getImage(chapter)" ng-disabled="working"></button>
+                <img ng-src="{{chapter.image}}" style="max-height:100px; max-width:100px"/>
+                <label class="item item-input">
+                    <span>Created at {{chapter.createdAt}}</span>
+                </label>
+                <button class="button icon ion-android-delete" ng-click="delete(chapter)" ng-disabled="working"></button>
+                <button class="button icon ion-android-create" ng-click="edit(chapter)" ng-disabled="working"></button>
+                <button class="button icon ion-android-sync" ng-click="sync(chapter)" ng-disabled="working"></button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,26 @@
+<ion-view title="Stories">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+    <form class="list">
+        <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="search" placeholder="" ng-change="filter()" ng-model="utils.filterStr">
+        </label>
+    </form>
+    <div class="button-bar">
+        <button class="button button-positive  button-block icon ion-android-add" ng-click="addNew()"></button>
+        <button class="button button-positive  button-block icon ion-android-sync"ng-click="syncAll()"></button>
+    </div>
+    <ion-list>
+        <ion-item ng-repeat="story in filteredStories">
+            <input type="text" placeholder="" ng-model="story.storyName">
+            <ion-toggle ng-model="story.public" toggle-class="toggle-calm">Public</ion-toggle>
+            <label class="item item-input">
+                <span>Story read {{story.nbRead}} times</span>
+            </label>
+            <button class="button icon ion-android-delete" ng-click="delete(story)" ng-disabled="working"></button>
+            <button class="button icon ion-android-create" ng-click="edit(story)" ng-disabled="working"></button>
+            <button class="button icon ion-android-sync" ng-click="sync(story)" ng-disabled="working"></button>
+        </ion-item>
+    </ion-list>
+    </ion-content>
+</ion-view>
