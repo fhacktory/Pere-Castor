@@ -36,6 +36,9 @@ function returnErrorFromCode(code, context) {
 }
 
 exports.authenticate = authenticate = function(event, context) {
+    if (!(event.pseudo && event.password)) {
+        returnErrorFromCode(0, context);
+    }
     UserController.login(event.pseudo, event.password, function(err, res) {
         if (err) {
             return context.fail(err);
@@ -140,6 +143,9 @@ exports.deleteChapter = deleteChapter = function(event, context) {
 };
 
 exports.getUserStories = getUserStories = function(event, context) {
+    if (!token) {
+        returnErrorFromCode(0, context);
+    }
     StoryController.getUserStories(event.token, function(err, res) {
         if (err) {
             return context.fail(err);
