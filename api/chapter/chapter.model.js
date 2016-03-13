@@ -1,5 +1,6 @@
 var dbUtils = require('../../lib/dynamoUtils');
 var utils = require('../../lib/utils');
+var path = require('path');
 
 var shortid = require('shortid');
 var AWS = require('aws-sdk');
@@ -38,7 +39,7 @@ var User = {
     },
     create: function(code, name, index, image, callback) {
         if (image) {
-            var imageBuffer = utils.decodeBase64Image(image);
+            var imageBuffer = utils.decodeBase64Image(image.base64);
         }
         var chapterId = shortid.generate();
         var params = {
@@ -63,7 +64,7 @@ var User = {
             var paramsS3 = {
                 Bucket: s3Bucket,
                 ACL: 'public-read',
-                Key: code + '/backgrounds/' + chapterId + '.' + imageBuffer.type.substring(imageBuffer.type.indexOf('/') + 1),
+                Key: code + '/backgrounds/' + chapterId + path.extname(image.filename),
                 Body: imageBuffer.data
             };
             s3.upload(paramsS3, function(err, data) {
@@ -102,7 +103,7 @@ var User = {
     },
     update: function(code, id, name, index, image, callback) {
         if (image) {
-            var imageBuffer = utils.decodeBase64Image(image);
+            var imageBuffer = utils.decodeBase64Image(image.base64);
         }
         var params = {
             Key: {
@@ -136,7 +137,7 @@ var User = {
             var paramsS3 = {
                 Bucket: s3Bucket,
                 ACL: 'public-read',
-                Key: code + '/backgrounds/' + id + '.' + imageBuffer.type.substring(imageBuffer.type.indexOf('/') + 1),
+                Key: code + '/backgrounds/' + id + path.extname(image.filename),
                 Body: imageBuffer.data
             };
             s3.upload(paramsS3, function(err, data) {

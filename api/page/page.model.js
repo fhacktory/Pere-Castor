@@ -1,5 +1,6 @@
 var dbUtils = require('../../lib/dynamoUtils');
 var utils = require('../../lib/utils');
+var path = require('path');
 
 var AWS = require('aws-sdk');
 AWS.config.update({
@@ -38,7 +39,7 @@ var Page = {
     },
     add: function(code, title, description, text, image, index, callback) {
         if (image) {
-            var imageBuffer = utils.decodeBase64Image(image);
+            var imageBuffer = utils.decodeBase64Image(image.base64);
         }
         var pageId = shortid.generate();
         var params = {
@@ -69,7 +70,7 @@ var Page = {
             var paramsS3 = {
                 Bucket: s3Bucket,
                 ACL: 'public-read',
-                Key: code + '/' + pageId + '.' + imageBuffer.type.substring(imageBuffer.type.indexOf('/') + 1),
+                Key: code + '/' + pageId + path.extname(image.filename),
                 Body: imageBuffer.data
             };
             s3.upload(paramsS3, function(err, data) {
@@ -109,7 +110,7 @@ var Page = {
     },
     update: function(code, id, title, description, text, image, index, callback) {
         if (image) {
-            var imageBuffer = utils.decodeBase64Image(image);
+            var imageBuffer = utils.decodeBase64Image(image.base64);
         }
 
         var params = {
@@ -152,7 +153,7 @@ var Page = {
             var paramsS3 = {
                 Bucket: s3Bucket,
                 ACL: 'public-read',
-                Key: code + '/' + id + '.' + imageBuffer.type.substring(imageBuffer.type.indexOf('/') + 1),
+                Key: code + '/' + id + path.extname(image.filename),
                 Body: imageBuffer.data
             };
             s3.upload(paramsS3, function(err, data) {
