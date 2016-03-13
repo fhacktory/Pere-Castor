@@ -104,7 +104,7 @@ exports.createChapter = createChapter = function(event, context) {
                 returnErrorFromCode(res, context);
             }
             else {
-                return context.succeed('');
+                return context.succeed(res);
             }
         }
     });
@@ -171,7 +171,7 @@ exports.addStory = addStory = function(event, context) {
                 returnErrorFromCode(res, context);
             }
             else {
-                return context.succeed('');
+                return context.succeed(res);
             }
         }
     });
@@ -235,7 +235,7 @@ exports.addPage = addPage = function(event, context) {
                 returnErrorFromCode(res, context);
             }
             else {
-                return context.succeed('');
+                return context.succeed(res);
             }
         }
     });

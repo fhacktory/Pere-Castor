@@ -79,7 +79,9 @@ var User = {
                             callback(err);
                         }
                         else {
-                            callback(null);
+                            callback(null, {
+                                id: chapterId
+                            });
                         }
                     });
                 }
@@ -91,7 +93,9 @@ var User = {
                     callback(err);
                 }
                 else {
-                    callback(null);
+                    callback(null, {
+                        id: chapterId
+                    });
                 }
             });
         }

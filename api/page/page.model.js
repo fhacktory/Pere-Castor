@@ -85,7 +85,9 @@ var Page = {
                             callback(err);
                         }
                         else {
-                            callback(null, data);
+                            callback(null, {
+                                id: pageId
+                            });
                         }
                     });
                 }
@@ -97,7 +99,9 @@ var Page = {
                     callback(err);
                 }
                 else {
-                    callback(null, data);
+                    callback(null, {
+                        id: pageId
+                    });
                 }
             });
         }

@@ -52,10 +52,11 @@ var Story = {
         });
     },
     add: function(pseudo, name, isPublic, index, callback) {
+        var id = shortid.generate()
         var params = {
             Item: {
                 id: {
-                    S: shortid.generate()
+                    S: id
                 },
                 code: {
                     S: pseudo
@@ -81,7 +82,9 @@ var Story = {
                 callback(err);
             }
             else {
-                callback(null, data);
+                callback(null, {
+                    id: id
+                });
             }
         });
     },
@@ -112,7 +115,8 @@ var Story = {
                     N: index.toString()
                 }
             };
-        }if (isPublic) {
+        }
+        if (isPublic) {
             params.AttributeUpdates.public = {
                 Action: 'PUT',
                 Value: {

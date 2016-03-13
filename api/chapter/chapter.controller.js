@@ -30,7 +30,7 @@ exports.createChapter = function(token, story, name, index, image, callback) {
                 callback(err);
             }
             else {
-                callback(null);
+                callback(null, data);
             }
         });
     }
