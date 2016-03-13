@@ -16,7 +16,7 @@
                  <input type="text" placeholder="" ng-model="page.description">
                   <input type="text" placeholder="" ng-model="page.text">
                 <button class="button icon ion-android-image" ng-click="getImage(page)"></button>
-                <img ng-src="{{page.image}}" style="max-height:100px; max-width:100px"/>
+                <img ng-src="{{page.image.filename  || page.image}}" style="max-height:100px; max-width:100px"/>
                 <label class="item item-input">
                     <span>Created at {{page.createdAt}}</span>
                 </label>

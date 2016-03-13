@@ -4,7 +4,7 @@ var currentStory = {};
 
 var currentChapter = {};
 
-var URL = 'http://private-efb1b-perecastor.apiary-mock.com';
+var URL = 'https://6y3cy2sqhh.execute-api.us-west-2.amazonaws.com/rc';
 
 angular.module('app.controllers', [])
 
@@ -52,7 +52,14 @@ angular.module('app.controllers', [])
 })
 
 .controller('signupCtrl', function($scope) {
+    $scope.user = {
+        pseudo: '',
+        password: '',
+        email: '',
+        mainStory: ''
+    };
 
+    
 })
 
 .controller('storiesCtrl', function($scope, $state, $http) {
@@ -127,6 +134,7 @@ angular.module('app.controllers', [])
             method = 'PUT';
             path += ('/' + story.id);
         }
+
         $http({
             method: method,
             url: URL + path,
@@ -157,7 +165,10 @@ angular.module('app.controllers', [])
             url: URL + '/api/users/' + user.pseudo + '/stories/' + story.id + '/chapters?token=' + user.token
         })
             .success(function(data) {
-                currentStory.chapters = data;
+                currentStory.chapters = data.map(function(m) {
+                    m.isSaved = true;
+                    return m;
+                });
                 $state.go('chapters');
                 $scope.working = false;
             })
@@ -212,9 +223,11 @@ angular.module('app.controllers', [])
             token: user.token,
             chapter: {
                 chapterName: chapter.chapterName,
-                index: chapter.index,
-                image: chapter.image
+                index: chapter.index
             }
+        }
+        if (chapter.image && chapter.image.filename) {
+            req.chapter.image = chapter.image;
         }
         var method = 'POST';
         var path = '/api/users/' + user.pseudo + '/stories/' + currentStory.id + '/chapters';
@@ -254,10 +267,12 @@ angular.module('app.controllers', [])
         };
 
         $cordovaImagePicker.getPictures(options).then(function(results) {
-                chapter.image = results[0];
+                chapter.image = {
+                    filename: results[0]
+                }
 
-                window.plugins.Base64.encodeFile(chapter.image, function(base64) {
-                    chapter.image = base64;
+                window.plugins.Base64.encodeFile(chapter.image.filename, function(base64) {
+                    chapter.image.base64 = base64;
                 });
             },
             function(error) {
@@ -290,7 +305,10 @@ angular.module('app.controllers', [])
             url: URL + '/api/users/' + user.pseudo + '/stories/' + currentStory.id + '/chapters/' + chapter.id + '/pages?token=' + user.token
         })
             .success(function(data) {
-                currentChapter.pages = data;
+                currentChapter.pages = data.map(function(m) {
+                    m.isSaved = true;
+                    return m;
+                });
                 $state.go('pages');
                 $scope.working = false;
             })
@@ -316,7 +334,7 @@ angular.module('app.controllers', [])
             text: "",
             image: "",
             createdAt: new Date(),
-            index: currentStory.pages.length || 0
+            index: currentChapter.pages.length || 0
         })
     }
 
@@ -353,8 +371,11 @@ angular.module('app.controllers', [])
                 index: page.index
             }
         }
+        if (page.image && page.image.filename) {
+            req.page.image = page.image;
+        }
         var method = 'POST';
-        var path = '/api/users/' + user.pseudo + '/stories/' + currentStory.id + '/chapters/' + currentChapter.id;
+        var path = '/api/users/' + user.pseudo + '/stories/' + currentStory.id + '/chapters/' + currentChapter.id + '/pages';
 
         if (page.isSaved) {
             method = 'PUT';
@@ -391,10 +412,12 @@ angular.module('app.controllers', [])
         };
 
         $cordovaImagePicker.getPictures(options).then(function(results) {
-                page.image = results[0];
+                page.image = {
+                    filename: results[0]
+                }
 
-                window.plugins.Base64.encodeFile(page.image, function(base64) {
-                    page.image = base64;
+                window.plugins.Base64.encodeFile(page.image.filename, function(base64) {
+                    page.image.base64 = base64;
                 });
             },
             function(error) {
