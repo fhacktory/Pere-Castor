@@ -6,8 +6,9 @@
     <title></title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-
+    <script src="lib/angular-messages/angular-messages.min.js"></script>  
     <!-- cordova script (this will be a 404 during development) -->
     <script src="lib/ngCordova/ng-cordova.min.js"></script>
     <script src="cordova.js"></script>
@@ -34,6 +35,11 @@
             <ion-nav-back-button class="button-icon icon ion-ios-arrow-back">Back</ion-nav-back-button>
         </ion-nav-bar>
         <ion-nav-view></ion-nav-view>
+        <script id="templates/form-errors.html" type="text/ng-template">  
+  <div class="form-error" ng-message="required">This field is required.</div>
+  <div class="form-error" ng-message="minlength">This field is must be at least 4 characters.</div>
+  <div class="form-error" ng-message="maxlength">This field is must be less than 50 characters</div>
+</script> 
     </div>
 </div>
   </body>

@@ -1,19 +1,27 @@
 <ion-view title="Login">
     <ion-content overflow-scroll="true" padding="true" class="has-header">
-        <form class="list">
+        <form class="list" name="signinForm" >
             <ion-list>
-                <label class="item item-input">
+                <label class="item item-input" ng-class="{ 'has-error' : signinForm.pseudo.$invalid, 'no-errors' : signinForm.pseudo.$valid}">
                     <span class="input-label">Username</span>
-                    <input type="text" placeholder="" ng-model="user.pseudo">
+                    <input ng-change="isValid(signinForm)" name="pseudo" type="text" placeholder="" ng-model="user.pseudo" ng-minlength="4" ng-maxlength="20" required>
                 </label>
-                <label class="item item-input">
+                <div class="form-errors" ng-messages="signinForm.pseudo.$error">  
+                    <div class="form-error" ng-message="maxlength">This field is must be less than 10 characters</div> 
+                    <div ng-messages-include="templates/form-errors.html"></div>
+                </div> 
+                <label class="item item-input" ng-class="{ 'has-error' : signinForm.password.$invalid, 'no-errors' : signinForm.password.$valid}">
                     <span class="input-label">Password</span>
-                    <input type="password" placeholder="" ng-model="user.password">
+                    <input ng-change="isValid(signinForm)" name="password" type="password" placeholder="" ng-model="user.password" ng-minlength="4" ng-maxlength="20" required>>
                 </label>
+                <div class="form-errors" ng-messages="signinForm.password.$error">  
+                    <div class="form-error" ng-message="maxlength">This field is must be less than 10 characters</div>  
+                    <div ng-messages-include="templates/form-errors.html"></div>
+                </div> 
             </ion-list>
             <div class="spacer" style="height: 40px;"></div>
-            <button ng-click="login()" id="login-button1" class="button button-stable  button-block" ng-disabled="working">Log in</button>
-            <a href="#" onclick="window.open('/signup', '_system', 'location=yes'); return false;" id="login-button2" class="button button-positive  button-block button-clear">Or create an account</a>
+            <button ng-click="login()" id="login-button1" class="button button-stable  button-block" ng-disabled="working || !ok">Log in</button>
+            <button ng-click="goSignUp()" class="button button-light  button-block" ng-disabled="working">Or create an account</button>
             </form>
     </ion-content>
 </ion-view>

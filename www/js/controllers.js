@@ -14,6 +14,12 @@ angular.module('app.controllers', [])
         password: ''
     };
     $scope.working = false;
+    $scope.ok = false;
+
+    $scope.isValid = function(signinForm) {
+        $scope.ok = signinForm.$valid;
+    }
+
     $scope.login = function() {
         $scope.working = true;
         $http({
@@ -26,40 +32,90 @@ angular.module('app.controllers', [])
         })
             .success(function(data) {
                 user.pseudo = $scope.user.pseudo;
-                user.token = data.result.token;
-                $http({
-                    method: 'GET',
-                    url: URL + '/api/users/' + user.pseudo + '/stories?token=' + user.token
-                })
-                    .success(function(data) {
-                        user.stories = data.map(function(m) {
-                            m.isSaved = true;
-                            return m;
-                        });
-                        $state.go('stories');
-                        $scope.working = false;
+                if (data.result && data.result.token) {
+                    user.token = data.result.token;
+                    $http({
+                        method: 'GET',
+                        url: URL + '/api/users/' + user.pseudo + '/stories?token=' + user.token
                     })
-                    .error(function(err) {
-                        $scope.working = false;
-                        alert('Error during authentication');
-                    });
+                        .success(function(data) {
+                            user.stories = data.map(function(m) {
+                                m.isSaved = true;
+                                return m;
+                            });
+                            $state.go('stories');
+                            $scope.working = false;
+                        })
+                        .error(function(err) {
+                            $scope.working = false;
+                            alert('Error during authentication');
+                        });
+                }
             })
             .error(function(err) {
                 $scope.working = false;
                 alert('Error during authentication');
             });
     };
+
+    $scope.goSignUp = function() {
+        $state.go('signup');
+    }
 })
 
-.controller('signupCtrl', function($scope) {
+.controller('signupCtrl', function($scope, $state, $ionicPopup, $http) {
     $scope.user = {
         pseudo: '',
         password: '',
         email: '',
         mainStory: ''
     };
+    $scope.working = true;
 
-    
+    $scope.isValid = function(signinForm) {
+        $scope.working = !signinForm.$valid;
+    }
+
+    $scope.signUp = function() {
+        $scope.working = true;
+        var req = {
+            pseudo: $scope.user.pseudo,
+            password: $scope.user.password,
+            mail: $scope.user.email,
+            mainStory: $scope.user.mainStory
+        }
+
+        $http({
+            method: 'POST',
+            url: URL + '/api/users/',
+            data: JSON.stringify(req),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .success(function(data) {
+                $scope.working = false;
+                if (data.result && data.result.token) {
+                    user.token = data.result.token;
+                    user.pseudo = $scope.user.pseudo;
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'success',
+                        template: 'Creation success. Please log in.'
+                    });
+
+                    alertPopup.then(function(res) {
+                        $state.go('login');
+                    });
+                }
+            })
+            .error(function(err) {
+                $scope.working = false;
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Error',
+                    template: 'Conflict. Pseudo already in use'
+                });
+            });
+    }
 })
 
 .controller('storiesCtrl', function($scope, $state, $http) {
